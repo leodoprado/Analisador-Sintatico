@@ -1,6 +1,6 @@
 ﻿# TDE Compiladores - 2024 (pywebview)
 
-### Leonardo do Prado (T2021/1)
+### Analisador Sintático - Leonardo do Prado (T2021/1)
 
 Gramática: <br/>
 ...
