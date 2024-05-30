@@ -26,3 +26,15 @@ Sentenças Corretas: <br/>
 
 Sentenças Incorretas: <br/>
 ...
+
+# Getting started
+
+### Install
+```
+$ pip3 install -r requirements.txt
+```
+
+### Run
+```
+$ python app.py
+```
