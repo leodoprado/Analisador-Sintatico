@@ -1,4 +1,4 @@
-﻿# TDE Compiladores - 2024
+﻿# TDE Compiladores - 2024 (pywebview)
 
 ### Leonardo do Prado (T2021/1)
 
