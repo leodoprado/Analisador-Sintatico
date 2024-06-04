@@ -1,2 +1,1 @@
-# Database de memória
-
+sentencas = []
