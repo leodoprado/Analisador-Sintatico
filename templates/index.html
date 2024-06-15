@@ -28,21 +28,27 @@
       <div class="container-fluid mt-3">
         <div class="row">
           <div class="col-sm-6">
-            <div class="d-flex justify-content-center align-items-start border border-primary" style="height: 220px; background-color: #e7f6ff;">
+            <div class="d-flex justify-content-center align-items-start border border-primary" style="height: 220px;">
               <div class="col-4 text-center mt-3">
                 <h1 class="fs-4 fw-bold">GLC</h1>
-                <p>S ::= bBc | cCa</p> 
-                <p>A ::= Cb | aBd</p>
-                <p>B ::= aCc | ε</p>
-                <p>C ::= bAc | bC</p>
+                <p>S ::= bAc | bC</p> 
+                <p>A ::= dB | a</p>
+                <p>B ::= aC | bS | ε</p>
+                <p>C ::= b | cB</p>
               </div>
               <div class="col-4 text-center mt-3">
                 <h1 class="fs-4 fw-bold">First</h1>
-                <p>S ::= bBc | cCa</p>
+                <p>S = { b }</p>
+                <p>A = { d, a }</p>
+                <p>B = { a, b, ε }</p>
+                <p>C = { b, c} </p>
               </div>
               <div class="col-4 text-center mt-3">
                 <h1 class="fs-4 fw-bold">Follow</h1>
-                <p>S ::= bBc | cCa</p>
+                <p>S = { $, a, b }</p>
+                <p>A = { b, c, a}</p>
+                <p>B = { $, a, b, c }</p>
+                <p>C = { a, b }</p>
               </div>
             </div>
           </div>
