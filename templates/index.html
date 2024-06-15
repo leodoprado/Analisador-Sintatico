@@ -47,11 +47,59 @@
             </div>
           </div>
           <div class="col-sm-6">
-            <div class="d-flex justify-content-center align-items-center border border-primary" style="height: 220px; background-color: #e7f6ff;">
-              <h1>Container 2</h1>
+            <div class="d-flex justify-content-center align-items-center border border-primary" style="height: 220px;">
+              <div class="table-responsive" style="width: 100%;">
+                <table class="table table-bordered mb-0 text-center" style="table-layout: fixed; height: 100%;">
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col">a</th>
+                      <th scope="col">b</th>
+                      <th scope="col">c</th>
+                      <th scope="col">d</th>
+                      <th scope="col">$</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">S</th>
+                      <td>S -> a</td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">A</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">B</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">C</th>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
+          </div>        
         </div>
+
         <div class="row mt-3">
           <div class="col-sm-12">
             <form>
@@ -72,24 +120,22 @@
         </div>
         <div class="row mt-3">
           <div class="col-sm-12">
-              <table class="table table-bordered table-striped w-100">
-                  <thead class="thead-light">
-                      <tr>
-                          <th>#</th>
-                          <th>Pilha</th>
-                          <th>Entrada</th>
-                          <th>Ação</th>
-                      </tr>
-                  </thead>
-                  <tbody>
+            <table class="table table-bordered table-striped w-100">
+                <thead class="thead-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Pilha</th>
+                        <th>Entrada</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
                       <!-- Linhas da tabela serão adicionadas aqui -->
-                  </tbody>
-              </table>
+                </tbody>
+            </table>
           </div>
-      </div>
-      </div>
-    
-      
+        </div>
+      </div>      
 
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
       <script src="{{ url_for('static', filename='js/cru.js') }}"></script>
