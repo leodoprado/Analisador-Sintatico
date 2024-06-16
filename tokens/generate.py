@@ -9,7 +9,5 @@ def gerar_sentenca():
         'cbaca',
         'babaabaccdccc'
     ]
-    sentenca_aleatoria = random.choice(sentencas)
-    print(sentenca_aleatoria)
-
-gerar_sentenca()
+    
+    return random.choice(sentencas)
