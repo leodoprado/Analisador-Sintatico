@@ -32,24 +32,24 @@
             <div class="d-flex justify-content-center align-items-start border border-primary" style="height: 220px;">
               <div class="col-4 text-center mt-3">
                 <h1 class="fs-4 fw-bold">GLC</h1>
-                <p>S ::= bAc | bC</p> 
-                <p>A ::= dB | a</p>
-                <p>B ::= aC | bS | ε</p>
-                <p>C ::= b | cB</p>
+                <p>S ::= bBa | cC</p> 
+                <p>A ::= cCa | bS | ε</p>
+                <p>B ::= cCa | b</p>
+                <p>C ::= Bd | a</p>
               </div>
               <div class="col-4 text-center mt-3">
                 <h1 class="fs-4 fw-bold">First</h1>
-                <p>S = { b }</p>
-                <p>A = { d, a }</p>
-                <p>B = { a, b, ε }</p>
-                <p>C = { b, c} </p>
+                <p>S = { b, c }</p>
+                <p>A = { c, b, ε }</p>
+                <p>B = { c, b }</p>
+                <p>C = { c, b, a} </p>
               </div>
               <div class="col-4 text-center mt-3">
                 <h1 class="fs-4 fw-bold">Follow</h1>
-                <p>S = { $, a, b }</p>
-                <p>A = { b, c, a}</p>
-                <p>B = { $, a, b, c }</p>
-                <p>C = { a, b }</p>
+                <p>S = { $, a, d }</p>
+                <p>A = { a, d }</p>
+                <p>B = { a, d }</p>
+                <p>C = { a, b, c, d, $ }</p>
               </div>
             </div>
           </div>
@@ -70,33 +70,33 @@
                   <tbody>
                     <tr>
                       <th scope="row">S</th>
-                      <td>S -> a</td>
                       <td></td>
-                      <td></td>
+                      <td>S → bBa</td>
+                      <td>S → cC</td>
                       <td></td>
                       <td></td>
                     </tr>
                     <tr>
                       <th scope="row">A</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>A → ε</td>
+                      <td>A → bS</td>
+                      <td>A → cCa</td>
+                      <td>A → ε</td>
                       <td></td>
                     </tr>
                     <tr>
                       <th scope="row">B</th>
                       <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>B → b</td>
+                      <td>B → cCA</td>
                       <td></td>
                       <td></td>
                     </tr>
                     <tr>
                       <th scope="row">C</th>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>C → a</td>
+                      <td>C → Bd</td>
+                      <td>C → Bd</td>
                       <td></td>
                       <td></td>
                     </tr>
