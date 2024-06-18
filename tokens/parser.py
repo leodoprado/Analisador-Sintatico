@@ -1,13 +1,108 @@
 import random
 
 epsilon = "ε"
-iteracao = 0
-pile = "$S"
-entry = ""
-end = False
-production = []
-palavraInput = input("Insira a palavra de entrada: ")
-table = []
+
+class Automaton:
+    def __init__(self):
+        self.iteracao = 0
+        self.pile = "$S"
+        self.entry = ""
+        self.end = False
+        self.production = []
+        self.table = []
+        self.initialize()
+
+    def init_automaton(self):
+        self.table = []
+
+    def init_production(self, nTerminal, inicial, producao):
+        for nonTerminal in self.production:
+            if nonTerminal.key == nTerminal:
+                nonTerminal.lista.append(Production(nonTerminal, inicial, producao))
+                return nonTerminal
+        
+        nonTerminal = NonTerminal(nTerminal, [Production(nTerminal, inicial, producao)])
+        self.production.append(nonTerminal)
+        return nonTerminal
+
+    def search_production(self, pile, char):
+        for nonTerminal in self.production:
+            if nonTerminal.key == pile:
+                for prod in nonTerminal.lista:
+                    if char in prod.inicial:
+                        return prod
+        return None
+
+    def next_pass(self, palavraInput):
+        if not palavraInput:
+            self.end = True
+            return
+
+        if self.end:
+            self.init_automaton()
+
+        if not self.entry:
+            self.entry = palavraInput + "$"
+
+        action = ""
+        charPile = self.pile[-1]
+        pileTable = self.pile
+        entryTable = self.entry
+        self.pile = self.pile[:-1]
+        self.iteracao += 1
+
+        if charPile == self.entry[0] and charPile == "$":
+            action = f"Aceito em {self.iteracao} iterações"
+            self.end = True
+        elif charPile.isupper():
+            globalProductionMatch = self.search_production(charPile, self.entry[0])
+            if globalProductionMatch:
+                action = f"{globalProductionMatch.nonTerminal} -> {globalProductionMatch.producao}"
+                if globalProductionMatch.producao != epsilon:
+                    self.pile += globalProductionMatch.producao[::-1]
+            else:
+                self.end = True
+                action = f"Erro em {self.iteracao} iterações!"
+        elif charPile == self.entry[0]:
+            action = f"Lê '{self.entry[0]}'"
+            self.entry = self.entry[1:]
+        else:
+            self.end = True
+            action = f"Erro em {self.iteracao} iterações!"
+
+        self.insert_row(pileTable, entryTable, action)
+        return action
+
+    def check_end(self, palavraInput):
+        self.init_automaton()
+        while not self.end:
+            action = self.next_pass(palavraInput)
+        return action
+
+    def insert_row(self, pile, entry, action):
+        self.table.append((self.iteracao, pile, entry, action))
+
+    def initialize(self):
+        self.iteracao = 0
+        self.pile = "$S"
+        self.entry = ""
+        self.end = False
+        self.production = []
+        self.table = []
+
+        self.init_automaton()
+
+        self.init_production("S", ["b"], "bBa")
+        self.init_production("S", ["c"], "cC")
+        self.init_production("A", ["a"], epsilon)
+        self.init_production("A", ["b"], "bS")
+        self.init_production("A", ["c"], "cCa")
+        self.init_production("A", ["d"], epsilon)
+        self.init_production("B", ["b"], "b")
+        self.init_production("B", ["c"], "cCA")
+        self.init_production("C", ["a"], "a")
+        self.init_production("C", ["b"], "Bd")
+        self.init_production("C", ["c"], "Bd")
 
 class NonTerminal:
     def __init__(self, key, lista):
@@ -19,127 +114,3 @@ class Production:
         self.nonTerminal = nonTerminal
         self.inicial = inicial
         self.producao = producao
-
-def initSentence():
-    global pile, entry, end
-    sentence = "S"
-    nTerminal = "S"
-
-    while not all(x.islower() for x in sentence):
-        for nonTerminal in production:
-            if nonTerminal.key == nTerminal:
-                prod = random.choice(nonTerminal.lista)
-                if prod.producao != epsilon:
-                    sentence = sentence.replace(nTerminal, prod.producao)
-                else:
-                    sentence = sentence.replace(nTerminal, '')
-
-                match = next((x for x in sentence if x.isupper()), None)
-                if match is None:
-                    break
-                nTerminal = match
-
-    initAutomaton()
-
-def initAutomaton():
-    global table
-    table = [(" ", "Pilha", "Entrada", "Ação")]
-
-def initProduction(nTerminal, inicial, producao):
-    exists = False
-    for i, nonTerminal in enumerate(production):
-        if nonTerminal.key == nTerminal:
-            production.pop(i)
-            exists = True
-            break
-
-    if not exists:
-        nonTerminal = NonTerminal(nTerminal, [])
-        production.append(nonTerminal)
-
-    nonTerminal.lista.append(Production(nonTerminal, inicial, producao))
-    return nonTerminal
-
-def searchProduction(pile, char):
-    for nonTerminal in production:
-        if nonTerminal.key == pile:
-            for prod in nonTerminal.lista:
-                if prod.nonTerminal.key == pile and char in prod.inicial:
-                    return prod
-    return None
-
-def nextPass():
-    global pile, entry, iteracao, end
-    if len(palavraInput) > 0:
-        if end:
-            initAutomaton()
-
-        if not entry:
-            entry = palavraInput + "$"
-
-        action = ""
-        charPile = pile[-1]
-        pileTable = pile
-        entryTable = entry
-        pile = pile[:-1]
-        iteracao += 1
-
-        if charPile == entry[0] and charPile == "$":
-            action = f"Aceito em {iteracao} iterações"
-            end = True
-        elif charPile and charPile.isupper():
-            globalProductionMatch = searchProduction(charPile, entry[0])
-            if globalProductionMatch:
-                action = f"{globalProductionMatch.nonTerminal.key} -> {globalProductionMatch.producao}"
-                if globalProductionMatch.producao != epsilon:
-                    pile += globalProductionMatch.producao[::-1]
-            else:
-                end = True
-                action = f"Erro em {iteracao} iterações!"
-        elif charPile and charPile == entry[0]:
-            action = f"Lê '{entry[0]}'"
-            entry = entry[1:]
-        else:
-            end = True
-            action = f"Erro em {iteracao} iterações!"
-
-        insertRow(pileTable, entryTable, action)
-        return action
-    else:
-        end = True
-
-def checkEnd():
-    global end
-    action = ""
-    initAutomaton()
-    while not end:
-        action = nextPass()
-    print(action)
-
-def insertRow(pile, entry, action):
-    global table
-    table.append((iteracao, pile, entry, action))
-
-# Chamadas Iniciais
-initAutomaton()
-
-# S	→ bBa | S → cC	
-production.append(initProduction("S", ["b"], "bBa"))
-production.append(initProduction("S", ["c"], "cC"))
-
-# A → ε | A → bS | A → cCa | A → ε
-production.append(initProduction("A", ["a"], epsilon))
-production.append(initProduction("A", ["b"], "bS"))
-production.append(initProduction("A", ["c"], "cCa"))
-production.append(initProduction("A", ["d"], epsilon))
-
-# B	→ b | B → cCA
-production.append(initProduction("B", ["b"], "b"))
-production.append(initProduction("B", ["c"], "cCA"))
-
-# C	→ a | C → Bd | C → Bd	
-production.append(initProduction("C", ["a"], "a"))
-production.append(initProduction("C", ["b"], "Bd"))
-production.append(initProduction("C", ["c"], "Bd"))
-
-checkEnd()

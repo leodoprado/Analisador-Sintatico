@@ -2,12 +2,12 @@ import random
 
 def gerar_sentenca():
     sentencas = [
-        'cbaaababd',
-        'badc',
-        'cbaabadccdca',
-        'babadccc',
-        'cbaca',
-        'babaabaccdccc'
+        'bcaa',
+        'bcbda',
+        'bbadcac',
+        'ccbdcaad',
+        'cccabbbadd',
+        'cccababadd'
     ]
     
     return random.choice(sentencas)
