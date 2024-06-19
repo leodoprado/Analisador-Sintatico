@@ -26,7 +26,7 @@ Tabela: <br/>
 | S | - | S → bBc | - | S → dCa | - |
 | A | A → aCb | -  | A → cBd | - | - |
 | B | B → aCc | B → b | B → ε | B → ε | - |
-| C | - | C → bAc | C → d | -      | - |
+| C | - | C → bAc | - | C → d | - |
 
 <br/>
 
