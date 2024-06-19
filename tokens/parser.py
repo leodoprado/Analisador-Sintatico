@@ -93,20 +93,23 @@ class Automaton:
 
         self.init_automaton()
 
-        self.init_production("S", ["b"], "bBa")
-        self.init_production("S", ["c"], "cC")
+        # S → b | S → d
+        self.init_production("S", ["b"], "bBc")
+        self.init_production("S", ["d"], "dCa")
 
-        self.init_production("A", ["a"], epsilon)
-        self.init_production("A", ["b"], "bS")
-        self.init_production("A", ["c"], "cCa")
-        self.init_production("A", ["d"], epsilon)
+        # A → a | A → c
+        self.init_production("A", ["a"], "aCb")
+        self.init_production("A", ["c"], "cBd")
 
+        # B → a | B → b | B → ε | B → ε
+        self.init_production("B", ["a"], "aCc")
         self.init_production("B", ["b"], "b")
-        self.init_production("B", ["c"], "cCA")
+        self.init_production("B", ["c"], epsilon)
+        self.init_production("B", ["d"], epsilon)
 
-        self.init_production("C", ["a"], "a")
-        self.init_production("C", ["b"], "Bd")
-        self.init_production("C", ["c"], "Bd")
+        # C → b | C → c
+        self.init_production("C", ["b"], "bAc")
+        self.init_production("C", ["c"], "d")
 
 class Production:
     def __init__(self, nonTerminalKey, inicial, producao):
