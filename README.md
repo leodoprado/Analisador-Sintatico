@@ -31,10 +31,14 @@ Tabela: <br/>
 <br/>
 
 **Sentenças Corretas:** <br/> 
-
+badcc - **Aceito** em 9 iterações <br/> 
+dbcbdca - **Aceito** em 12 iterações <br/> 
+babadbccc - **Aceito** em 15 iterações <br/> 
+bababcdcbccc - **Aceito** em 20 iterações
 
 **Sentenças Incorretas:** <br/>
-
+dbcbdcd - **Erro** em 11 iterações <br/>
+bababcdcaa - **Erro** em 16 iterações
 
 # Getting started
 

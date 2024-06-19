@@ -109,7 +109,7 @@ class Automaton:
 
         # C → b | C → c
         self.init_production("C", ["b"], "bAc")
-        self.init_production("C", ["c"], "d")
+        self.init_production("C", ["d"], "d")
 
 class Production:
     def __init__(self, nonTerminalKey, inicial, producao):
