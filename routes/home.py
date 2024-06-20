@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request
 from tokens.generate import gerar_sentenca
 from tokens import parser
+import time
 
 home_route = Blueprint('home', __name__)
 
@@ -17,11 +18,6 @@ def gerar_sentencas():
 def gerar_parsing():
     automaton = parser.Automaton()  # Cria uma instância do autômato para cada requisição
     listsentencesInput = request.form.get('sentencesInput')
-    
-    # Verifica se o botão "Step by Step" foi clicado
-    if 'step' in request.form:
-        action = automaton.next_pass(listsentencesInput)
-        return render_template('index.html', table=automaton.table, palavra=listsentencesInput, step_by_step=True, action=action)
-    else:
-        automaton.check_end(listsentencesInput)
-        return render_template('index.html', table=automaton.table, palavra=listsentencesInput)
+    automaton.check_end(listsentencesInput)
+    return render_template('index.html', table=automaton.table, palavra=listsentencesInput)
+

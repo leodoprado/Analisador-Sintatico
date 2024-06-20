@@ -9,7 +9,6 @@
   }
   .table-responsive {
     height: 100%; /* Limita a altura da tabela ao tamanho do container */
-    overflow-y: auto; /* Adiciona barra de rolagem vertical se necessário */
   }
   .table {
     margin: 0; /* Remove as margens da tabela */
