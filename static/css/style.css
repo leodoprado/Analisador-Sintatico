@@ -1,15 +1,17 @@
 * {
-    font-family: 'Mulish', sans-serif;
+  font-family: 'Mulish', sans-serif;
 }
 
 .table-container {
-    height: 220px;
-    background-color: #e7f6ff;
-    overflow: hidden; /* Impede que o container aumente de tamanho */
-  }
-  .table-responsive {
-    height: 100%; /* Limita a altura da tabela ao tamanho do container */
-  }
-  .table {
-    margin: 0; /* Remove as margens da tabela */
-  }
+  height: 220px;
+  background-color: #e7f6ff;
+  overflow: hidden; /* Impede que o container aumente de tamanho */
+}
+
+.table-responsive {
+  height: 100%; /* Limita a altura da tabela ao tamanho do container */
+}
+
+.table {
+  margin: 0; /* Remove as margens da tabela */
+}
