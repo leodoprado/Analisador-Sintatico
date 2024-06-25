@@ -40,7 +40,7 @@ bababcdcbccc - **Aceito** em 20 iterações
 dbcbdcd - **Erro** em 11 iterações <br/>
 bababcdcaa - **Erro** em 16 iterações
 
-# Getting started
+# Getting started (web)
 
 ### Install
 ```
@@ -50,4 +50,9 @@ $ pip3 install -r requirements.txt
 ### Run
 ```
 $ python app.py
+```
+
+# Getting started (desktop)
+```
+$ pyinstaller -w -F --add-data "templates;templates" --add-data "static;static" app.py --path 'C:\Program Files (x86)\Windows Kits\10\Redist\ucrt\DLLs\x64'
 ```

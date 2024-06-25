@@ -1,11 +1,9 @@
-import random
-
 epsilon = "ε"
 
 class Automaton:
     def __init__(self):
         self.iteracao = 0
-        self.pile = "$S"
+        self.stack = "$S"
         self.entry = ""
         self.end = False
         self.production = []
@@ -26,16 +24,16 @@ class Automaton:
         return nonTerminal
 
 
-    def search_production(self, pile, char):
+    def search_production(self, stack, char):
         for nonTerminal in self.production:
-            if nonTerminal.key == pile:
+            if nonTerminal.key == stack:
                 for prod in nonTerminal.lista:
                     if char in prod.inicial:
                         return prod
         return None
 
-    def next_pass(self, palavraInput):
-        if not palavraInput:
+    def next_stage(self, sentenceInput):
+        if not sentenceInput:
             self.end = True
             return
 
@@ -43,49 +41,49 @@ class Automaton:
             self.init_automaton()
 
         if not self.entry:
-            self.entry = palavraInput + "$"
+            self.entry = sentenceInput + "$"
 
         action = ""
-        charPile = self.pile[-1]
-        pileTable = self.pile
+        charStack = self.stack[-1]
+        stackTable = self.stack
         entryTable = self.entry
-        self.pile = self.pile[:-1]
+        self.stack = self.stack[:-1]
         self.iteracao += 1
 
-        if charPile == self.entry[0] and charPile == "$":
+        if charStack == self.entry[0] and charStack == "$":
             action = f"Aceito em {self.iteracao} iterações"
             self.end = True
-        elif charPile.isupper():
-            globalProductionMatch = self.search_production(charPile, self.entry[0])
+        elif charStack.isupper():
+            globalProductionMatch = self.search_production(charStack, self.entry[0])
             if globalProductionMatch:
                 action = f"{globalProductionMatch.nonTerminalKey} -> {globalProductionMatch.producao}"
                 if globalProductionMatch.producao != epsilon:
-                    self.pile += globalProductionMatch.producao[::-1]
+                    self.stack += globalProductionMatch.producao[::-1]
             else:
                 self.end = True
                 action = f"Erro em {self.iteracao} iterações!"
-        elif charPile == self.entry[0]:
+        elif charStack == self.entry[0]:
             action = f"Lê '{self.entry[0]}'"
             self.entry = self.entry[1:]
         else:
             self.end = True
             action = f"Erro em {self.iteracao} iterações!"
 
-        self.insert_row(pileTable, entryTable, action)
+        self.insert_row(stackTable, entryTable, action)
         return action
 
-    def check_end(self, palavraInput):
+    def check_end(self, sentenceInput):
         self.init_automaton()
         while not self.end:
-            action = self.next_pass(palavraInput)
+            action = self.next_stage(sentenceInput)
         return action
 
-    def insert_row(self, pile, entry, action):
-        self.table.append((self.iteracao, pile, entry, action))
+    def insert_row(self, stack, entry, action):
+        self.table.append((self.iteracao, stack, entry, action))
 
     def initialize(self):
         self.iteracao = 0
-        self.pile = "$S"
+        self.stack = "$S"
         self.entry = ""
         self.end = False
         self.production = []

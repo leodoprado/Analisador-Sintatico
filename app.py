@@ -4,10 +4,9 @@ import webview
 
 app = Flask(__name__)
 
-#webview.create_window('Analisador Sintático', app)
+app.register_blueprint(home_route, url_prefix='/')  
 
-app.register_blueprint(home_route, url_prefix='/')   
+webview.create_window('Analisador Sintático', app) 
 
 if __name__ == "__main__":
-    app.run(debug=True)
-    #webview.start()
+    webview.start()
